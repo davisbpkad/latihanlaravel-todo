@@ -13,7 +13,12 @@ class TodoController extends Controller
     public function index()
     {
         // Ambil semua todo dari database
-        $todos = Todo::all();
+        // $todos = Todo::all();
+        
+        // Urutkan berdasarkan status selesai (belum selesai di atas) dan tanggal dibuat (baru di atas)
+        // Gunakan eager loading jika ada relasi yang perlu dimuat
+        $todos = Todo::orderBy('created_at', 'desc')
+                 ->get();
         return view('todos.index', compact('todos'));
     }
 
