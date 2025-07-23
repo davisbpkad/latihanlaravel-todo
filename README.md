@@ -8,6 +8,7 @@ Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neo
 - Tambah, edit, hapus, dan centang todo
 - Tampilan modern neobrutalism (tombol, checkbox, dsb)
 - Menggunakan Blade Component untuk form dan item todo
+- Factory dan seeder untuk generate data dummy todo
 - Tidak membutuhkan autentikasi (siap pakai)
 
 ## Instalasi
@@ -46,7 +47,14 @@ Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neo
    php artisan migrate
    ```
 
-5. **Jalankan aplikasi**
+5. **(Opsional) Generate Data Dummy**
+   - Untuk mengisi tabel todos dengan data contoh, jalankan:
+     ```bash
+     php artisan db:seed
+     ```
+   - Secara default akan dibuat 5 data todo dummy (lihat `database/seeders/TodoSeeder.php`).
+
+6. **Jalankan aplikasi**
    - Jalankan backend Laravel:
      ```bash
      php artisan serve
@@ -56,13 +64,15 @@ Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neo
      npm run dev
      ```
 
-6. **Akses aplikasi**
+7. **Akses aplikasi**
    - Buka browser ke: [http://127.0.0.1:8000/todos](http://127.0.0.1:8000/todos)
 
 ## Struktur Utama
 - `app/Http/Controllers/TodoController.php` — logika CRUD todo
 - `app/Models/Todo.php` — model todo
 - `database/migrations/2024_05_10_000000_create_todos_table.php` — migrasi tabel todos
+- `database/factories/TodoFactory.php` — factory untuk generate data todo dummy
+- `database/seeders/TodoSeeder.php` — seeder untuk generate data todo dummy
 - `resources/views/todos/index.blade.php` — tampilan utama, menggunakan komponen
 - `resources/views/components/todo-form.blade.php` — Blade component form tambah todo
 - `resources/views/components/todo-item.blade.php` — Blade component satu item todo
@@ -73,4 +83,7 @@ Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neo
 ## Style Neobrutalism
 - Tombol dan checkbox menggunakan warna solid, border tebal, shadow tebal, dan animasi hover/active khas neobrutalism.
 - Komponen Blade memudahkan modifikasi tampilan dan logika.
+
+## Lisensi
+MIT
 
