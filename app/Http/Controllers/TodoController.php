@@ -18,7 +18,8 @@ class TodoController extends Controller
         // Urutkan berdasarkan status selesai (belum selesai di atas) dan tanggal dibuat (baru di atas)
         // Gunakan eager loading jika ada relasi yang perlu dimuat
         $todos = Todo::orderBy('created_at', 'desc')
-                 ->get();
+        //make paginate
+                 ->paginate(5);
         return view('todos.index', compact('todos'));
     }
 
@@ -30,10 +31,13 @@ class TodoController extends Controller
         // Validasi input
         $request->validate([
             'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
         // Simpan todo baru dengan status belum selesai
         Todo::create([
             'title' => $request->title,
+            'description' => $request->description,
+            // Status selesai default adalah false
             'completed' => false,
         ]);
         return redirect()->route('todos.index');
@@ -44,10 +48,15 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
+        $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        ]);
         // Update status dan judul todo
         $todo->update([
             'completed' => $request->has('completed'),
             'title' => $request->title,
+            'description' => $request->description,
         ]);
         return redirect()->route('todos.index');
     }

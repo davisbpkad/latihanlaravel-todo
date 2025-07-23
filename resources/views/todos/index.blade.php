@@ -18,5 +18,9 @@
         @endforeach
     </ul>
     @endif
+
+    <div class="mt-6 p-4 rounded-lg border-1 border-black shadow-[4px_4px_0_0_#000]">
+        {{ $todos->links() }}
 </div>
 @endsection 
+
