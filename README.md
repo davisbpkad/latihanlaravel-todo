@@ -2,88 +2,103 @@
 
 # Laravel ToDo App
 
-Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neobrutalism dan arsitektur Blade Component.
+A simple ToDo List application built with Laravel, PostgreSQL, and Tailwind CSS.
+
+---
 
 ## Fitur
-- Tambah, edit, hapus, dan centang todo
-- Tampilan modern neobrutalism (tombol, checkbox, dsb)
-- Menggunakan Blade Component untuk form dan item todo
-- Factory dan seeder untuk generate data dummy todo
-- Tidak membutuhkan autentikasi (siap pakai)
+
+- CRUD Todo (buat, lihat, edit, hapus)
+- Setiap todo memiliki **title** dan **description**
+- Tampilkan dan edit description dalam modal pop-up dengan latar belakang blur
+- Checkbox untuk menandai todo selesai
+- Pagination dengan tampilan custom (background putih)
+- Aksi (edit, detail, delete) menggunakan Blade Components
+- Ikon tombol menggunakan Font Awesome
+
+---
 
 ## Instalasi
 
-1. **Clone repository & install dependency**
-   ```bash
+1. **Clone repository**
+   ```sh
    git clone <repo-url>
    cd latihanlaravel
-   composer install
-   npm install
    ```
 
-2. **Setup environment**
-   - Copy file `.env.example` ke `.env` dan sesuaikan konfigurasi database PostgreSQL:
-     ```env
-     DB_CONNECTION=pgsql
-     DB_HOST=127.0.0.1
-     DB_PORT=5432
-     DB_DATABASE=latihanlaravel
-     DB_USERNAME=postgres
-     DB_PASSWORD=
-     ```
-   - Generate app key:
-     ```bash
-     php artisan key:generate
-     ```
+2. **Install dependencies**
+   ```sh
+   composer install
+   npm install && npm run dev
+   ```
 
-3. **Buat database**
-   - Buat database `latihanlaravel` di PostgreSQL (misal via DBeaver/pgAdmin/CLI):
-     ```sql
-     CREATE DATABASE latihanlaravel;
-     ```
+3. **Copy file environment**
+   ```sh
+   cp .env.example .env
+   ```
 
-4. **Jalankan migrasi**
-   ```bash
+4. **Atur koneksi database** di file `.env`  
+   (Pastikan sudah membuat database PostgreSQL sesuai konfigurasi)
+
+5. **Generate app key**
+   ```sh
+   php artisan key:generate
+   ```
+
+6. **Jalankan migrasi**
+   ```sh
    php artisan migrate
    ```
 
-5. **(Opsional) Generate Data Dummy**
-   - Untuk mengisi tabel todos dengan data contoh, jalankan:
-     ```bash
-     php artisan db:seed
-     ```
-   - Secara default akan dibuat 5 data todo dummy (lihat `database/seeders/TodoSeeder.php`).
+7. **Jalankan server**
+   ```sh
+   php artisan serve
+   ```
 
-6. **Jalankan aplikasi**
-   - Jalankan backend Laravel:
-     ```bash
-     php artisan serve
-     ```
-   - Jalankan Vite (untuk Tailwind):
-     ```bash
-     npm run dev
-     ```
+---
 
-7. **Akses aplikasi**
-   - Buka browser ke: [http://127.0.0.1:8000/todos](http://127.0.0.1:8000/todos)
+## Penggunaan
 
-## Struktur Utama
-- `app/Http/Controllers/TodoController.php` — logika CRUD todo
-- `app/Models/Todo.php` — model todo
-- `database/migrations/2024_05_10_000000_create_todos_table.php` — migrasi tabel todos
-- `database/factories/TodoFactory.php` — factory untuk generate data todo dummy
-- `database/seeders/TodoSeeder.php` — seeder untuk generate data todo dummy
-- `resources/views/todos/index.blade.php` — tampilan utama, menggunakan komponen
-- `resources/views/components/todo-form.blade.php` — Blade component form tambah todo
-- `resources/views/components/todo-item.blade.php` — Blade component satu item todo
-- `app/View/Components/TodoForm.php` — class komponen form
-- `app/View/Components/TodoItem.php` — class komponen item
-- `app/Providers/AppServiceProvider.php` — registrasi Blade component
+- Tambahkan todo baru melalui form di halaman utama.
+- Klik tombol **Detail** (ikon info) untuk melihat deskripsi todo dalam modal pop-up.
+- Klik tombol **Edit** (ikon pensil) untuk mengedit todo dalam modal pop-up.
+- Klik tombol **Hapus** (ikon trash) untuk menghapus todo.
+- Navigasi antar halaman menggunakan pagination di bawah daftar todo.
 
-## Style Neobrutalism
-- Tombol dan checkbox menggunakan warna solid, border tebal, shadow tebal, dan animasi hover/active khas neobrutalism.
-- Komponen Blade memudahkan modifikasi tampilan dan logika.
+---
 
-## Lisensi
-MIT
+## Kustomisasi
 
+### Pagination
+- Pagination sudah di-custom agar memiliki background putih.
+- Jika ingin mengubah style, edit file:  
+  `resources/views/vendor/pagination/tailwind.blade.php`
+
+### Font Awesome
+- Sudah terpasang via CDN di file layout utama (`resources/views/layouts/app.blade.php`).
+- Gunakan ikon dengan class Font Awesome di komponen tombol.
+
+### Modal Pop-up
+- Modal detail dan edit menggunakan komponen Blade `<x-modal>` dengan efek blur pada latar.
+
+---
+
+## Struktur Komponen Blade
+
+- `resources/views/components/todo-item.blade.php`
+- `resources/views/components/todo-actions.blade.php`
+- `resources/views/components/todo-delete-button.blade.php`
+- `resources/views/components/todo-detail-button.blade.php`
+- `resources/views/components/todo-edit-button.blade.php`
+- `resources/views/components/todo-detail-section.blade.php`
+- `resources/views/components/todo-edit-section.blade.php`
+- `resources/views/components/modal.blade.php`
+
+---
+
+## Catatan
+
+- Pastikan parameter `page` selalu dikirim pada tombol aksi detail/edit agar tetap di halaman yang sama saat menggunakan pagination.
+- Jangan gunakan method GET untuk aksi hapus, gunakan POST + method spoofing DELETE.
+
+---
