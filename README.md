@@ -2,11 +2,12 @@
 
 # Laravel ToDo App
 
-Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS.
+Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS, dengan tampilan neobrutalism dan arsitektur Blade Component.
 
 ## Fitur
 - Tambah, edit, hapus, dan centang todo
-- Tampilan modern dengan TailwindCSS
+- Tampilan modern neobrutalism (tombol, checkbox, dsb)
+- Menggunakan Blade Component untuk form dan item todo
 - Tidak membutuhkan autentikasi (siap pakai)
 
 ## Instalasi
@@ -61,6 +62,15 @@ Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS.
 ## Struktur Utama
 - `app/Http/Controllers/TodoController.php` — logika CRUD todo
 - `app/Models/Todo.php` — model todo
-- `resources/views/todos/index.blade.php` — tampilan utama
 - `database/migrations/2024_05_10_000000_create_todos_table.php` — migrasi tabel todos
+- `resources/views/todos/index.blade.php` — tampilan utama, menggunakan komponen
+- `resources/views/components/todo-form.blade.php` — Blade component form tambah todo
+- `resources/views/components/todo-item.blade.php` — Blade component satu item todo
+- `app/View/Components/TodoForm.php` — class komponen form
+- `app/View/Components/TodoItem.php` — class komponen item
+- `app/Providers/AppServiceProvider.php` — registrasi Blade component
+
+## Style Neobrutalism
+- Tombol dan checkbox menggunakan warna solid, border tebal, shadow tebal, dan animasi hover/active khas neobrutalism.
+- Komponen Blade memudahkan modifikasi tampilan dan logika.
 
