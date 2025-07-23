@@ -59,3 +59,70 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Laravel ToDo App
+
+Aplikasi ToDo sederhana berbasis Laravel 12 dan TailwindCSS.
+
+## Fitur
+- Tambah, edit, hapus, dan centang todo
+- Tampilan modern dengan TailwindCSS
+- Tidak membutuhkan autentikasi (siap pakai)
+
+## Instalasi
+
+1. **Clone repository & install dependency**
+   ```bash
+   git clone <repo-url>
+   cd latihanlaravel
+   composer install
+   npm install
+   ```
+
+2. **Setup environment**
+   - Copy file `.env.example` ke `.env` dan sesuaikan konfigurasi database PostgreSQL:
+     ```env
+     DB_CONNECTION=pgsql
+     DB_HOST=127.0.0.1
+     DB_PORT=5432
+     DB_DATABASE=latihanlaravel
+     DB_USERNAME=postgres
+     DB_PASSWORD=
+     ```
+   - Generate app key:
+     ```bash
+     php artisan key:generate
+     ```
+
+3. **Buat database**
+   - Buat database `latihanlaravel` di PostgreSQL (misal via DBeaver/pgAdmin/CLI):
+     ```sql
+     CREATE DATABASE latihanlaravel;
+     ```
+
+4. **Jalankan migrasi**
+   ```bash
+   php artisan migrate
+   ```
+
+5. **Jalankan aplikasi**
+   - Jalankan backend Laravel:
+     ```bash
+     php artisan serve
+     ```
+   - Jalankan Vite (untuk Tailwind):
+     ```bash
+     npm run dev
+     ```
+
+6. **Akses aplikasi**
+   - Buka browser ke: [http://127.0.0.1:8000/todos](http://127.0.0.1:8000/todos)
+
+## Struktur Utama
+- `app/Http/Controllers/TodoController.php` — logika CRUD todo
+- `app/Models/Todo.php` — model todo
+- `resources/views/todos/index.blade.php` — tampilan utama
+- `database/migrations/2024_05_10_000000_create_todos_table.php` — migrasi tabel todos
+
+## Lisensi
+MIT

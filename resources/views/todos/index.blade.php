@@ -26,7 +26,7 @@
             <form action="{{ route('todos.destroy', $todo) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="text-red-500 hover:text-red-700 font-bold px-3 py-1 rounded transition opacity-0 group-hover:opacity-100">Hapus</button>
+                <button class="bg-red-500 hover:bg-red-700 text-white hover:text-white font-bold px-3 py-1 rounded transition opacity-0 group-hover:opacity-100">Hapus</button>
             </form>
         </li>
         @endforeach
