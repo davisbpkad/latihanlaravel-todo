@@ -10,7 +10,13 @@
                 active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">
             <input type="text" name="title" value="{{ $todo->title }}" class="flex-1 bg-transparent border-none focus:outline-none text-lg {{ $todo->completed ? 'line-through text-gray-400' : 'text-gray-800' }}">
         </form>
-         <x-todo-actions :todo="$todo" />
-    </div>
+         <div class="flex gap-2">
+    <x-todo-detail-button :todo="$todo" />
+    <x-todo-edit-button :todo="$todo" />
+    <x-todo-delete-button :todo="$todo" />
+        </div>
+    <x-todo-detail-section :todo="$todo" />
+    <x-todo-edit-section :todo="$todo" />
+        </div>
     
 </li>
